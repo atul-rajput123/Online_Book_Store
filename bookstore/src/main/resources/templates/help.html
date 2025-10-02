@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot - Bookstore</title>
+    <style>
+        body { font-family: Arial; background:#f1f3f6; margin:0; display:flex; height:100vh; }
+        .menu { width:250px; background:#1e293b; color:white; display:flex; flex-direction:column; }
+        .menu h3 { padding:20px; margin:0; background:#0f172a; text-align:center; }
+        .menu form { border-bottom:1px solid rgba(255,255,255,0.1); }
+        .menu button { width:100%; padding:15px 20px; border:none; background:transparent; color:white; text-align:left; cursor:pointer; }
+        .menu button:hover { background:#334155; }
+        .chat { flex:1; display:flex; flex-direction:column; background:white; }
+        .chat-header { padding:15px; background:#1e293b; color:white; font-weight:bold; }
+        .chat-body { flex:1; padding:15px; background:#e2e8f0; overflow-y:auto; }
+        .chat-message { margin-bottom:10px; max-width:70%; padding:10px 15px; border-radius:15px; clear:both; }
+        .bot { background:#e0e0e0; float:left; }
+        .user { background:#4f46e5; color:white; float:right; }
+        .chat-input { padding:10px; border-top:1px solid #ccc; background:#f9fafb; }
+        .chat-input input { width:80%; padding:10px; border-radius:20px; border:1px solid #ccc; }
+        .chat-input button { padding:10px 20px; border:none; background:#4f46e5; color:white; border-radius:20px; cursor:pointer; }
+        .chat-input button:hover { background:#4338ca; }
+    </style>
+</head>
+<body>
+   
+    <div class="menu">
+        <h3>📚 Help Menu</h3>
+        <div th:each="menuItem : ${currentMenu}">
+            <form method="get" action="/chatbot">
+                <input type="hidden" name="menu" th:value="${menuItem.getKey()}">
+                <button type="submit" th:text="${menuItem.getKey()}"></button>
+            </form>
+        </div>
+       
+      <div class="mt-3">
+        <div class="mt-3">
+        <button class="btn btn-secondary" style="font-size: 20px;" onclick="goBack()">⬅ Back</button>
+       </div>
+        <script>
+           function goBack() {
+              if (document.referrer) {
+                window.history.back();
+              } else {
+                 window.location.href = '/chatbot';
+              }
+            }
+         </script>
+        <a th:href="@{/}" class="btn btn-primary" style="font-size: 20px;">🏠 Home</a>
+    </div>
+    </div>
+
+   
+    <div class="chat">
+        <div class="chat-header">Online Bookstore Chatbot</div>
+        <div class="chat-body">
+    <div th:if="${userQuestion != null}">
+        <div class="chat-message user" th:text="${userQuestion}"></div>
+        <div class="chat-message bot" th:utext="${botAnswer}"></div>
+    </div>
+    <div th:if="${userQuestion == null}">
+        <div class="chat-message bot" th:utext="${botAnswer}"></div>
+    </div>
+</div>
+
+       
+        <div class="chat-input">
+            <form method="get" action="/chatbot">
+                <input type="text" name="type" placeholder="Type your question..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
