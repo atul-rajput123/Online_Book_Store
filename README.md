@@ -70,66 +70,90 @@ bookstore/
 Use these example tables as a starting point. Adjust fields to your requirements.
 
 ```sql
-CREATE TABLE `book` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `title` VARCHAR(255) NOT NULL,
-  `author` VARCHAR(255),
-  `description` TEXT,
-  `price` DECIMAL(10,2) NOT NULL,
-  `stock` INT DEFAULT 0,
-  `category` VARCHAR(100),
-  `image_url` VARCHAR(255),
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE users (
+  username VARCHAR(255) PRIMARY KEY,
+  password VARCHAR(255) NOT NULL,
+  enabled TINYINT(1) NOT NULL
 );
 
-CREATE TABLE `customer` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `name` VARCHAR(255) NOT NULL,
-  `email` VARCHAR(255) UNIQUE,
-  `phone` VARCHAR(50),
-  `city` VARCHAR(100),
-  `house_no` VARCHAR(100),
-  `street` VARCHAR(255)
+CREATE TABLE authorities (
+  username VARCHAR(255) NOT NULL,
+  authority VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE `cart_item` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `customer_id` INT,
-  `book_id` INT,
-  `quantity` INT DEFAULT 1,
-  FOREIGN KEY (customer_id) REFERENCES customer(id),
-  FOREIGN KEY (book_id) REFERENCES book(id)
+CREATE TABLE books (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  authors VARCHAR(255) NOT NULL,
+  isbn VARCHAR(255) NOT NULL,
+  price DECIMAL(19,2) NOT NULL,
+  published_on DATE NOT NULL,
+  publisher VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE `order_table` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `customer_id` INT,
-  `total_amount` DECIMAL(10,2),
-  `status` VARCHAR(50) DEFAULT 'PLACED',
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (customer_id) REFERENCES customer(id)
+CREATE TABLE customers (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  surname VARCHAR(50) NOT NULL,
+  email VARCHAR(254) NOT NULL,
+  phone_number VARCHAR(15) NOT NULL,
+  city VARCHAR(60) NOT NULL,
+  country_region VARCHAR(55) NOT NULL,
+  postal_code VARCHAR(18) NOT NULL,
+  street_and_house_number VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE `order_item` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `order_id` INT,
-  `book_id` INT,
-  `quantity` INT,
-  `price` DECIMAL(10,2),
-  FOREIGN KEY (order_id) REFERENCES order_table(id),
-  FOREIGN KEY (book_id) REFERENCES book(id)
+CREATE TABLE orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  order_date DATE NOT NULL,
+  book_id BIGINT,
+  customer_id BIGINT,
+  ans VARCHAR(255),
+  menu VARCHAR(255)
 );
 
-CREATE TABLE `feedback` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `order_id` INT,
-  `customer_id` INT,
-  `rating` INT,
-  `comment` TEXT,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (order_id) REFERENCES order_table(id),
-  FOREIGN KEY (customer_id) REFERENCES customer(id)
+CREATE TABLE chatbot (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ans VARCHAR(255),
+  menu VARCHAR(255)
 );
+
+CREATE TABLE payment (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ans VARCHAR(255),
+  menu VARCHAR(255)
+);
+
+CREATE TABLE feed_back (
+  id INT PRIMARY KEY,
+  message VARCHAR(255),
+  name VARCHAR(255)
+);
+
+CREATE TABLE replacement (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ans VARCHAR(255),
+  menu VARCHAR(255)
+);
+
+CREATE TABLE track (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ans VARCHAR(255),
+  menu VARCHAR(255)
+);
+
+CREATE TABLE orderes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ans VARCHAR(255),
+  menu VARCHAR(255)
+);
+
+CREATE TABLE other (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ans VARCHAR(255),
+  menu VARCHAR(255)
+);
+
 ```
 
 ---
