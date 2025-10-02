@@ -46,26 +46,89 @@ This README explains the features, tech stack, setup, database, and how to run a
 
 ---
 
-## Project Structure (recommended)
+## Project Structure
 
 ```
-bookstore/
-├─ src/main/java/com/yourorg/bookstore
-│  ├─ controller
-│  ├─ model
-│  ├─ repository
-│  ├─ service
-│  └─ config
-├─ src/main/resources
-│  ├─ templates   (Thymeleaf pages)
-│  └─ static      (css, js, images)
-├─ src/test/java
-└─ pom.xml
+BOOKSTORE/
+├─ .mvn
+├─ .settings
+├─ src/
+│  ├─ main/
+│  │  ├─ java/com/crni99/bookstore/
+│  │  │  ├─ chatbotmodel/
+│  │  │  │  ├─ ChatbotMenu.java
+│  │  │  │  ├─ OrderMenu.java
+│  │  │  │  ├─ OtherMenu.java
+│  │  │  │  ├─ PaymentMenu.java
+│  │  │  │  ├─ ReplacementMenu.java
+│  │  │  │  └─ TrackOrderMenu.java
+│  │  │  ├─ config/
+│  │  │  ├─ controller/
+│  │  │  │  ├─ BookController.java
+│  │  │  │  ├─ CartController.java
+│  │  │  │  ├─ ChatbotController.java
+│  │  │  │  ├─ CheckoutController.java
+│  │  │  │  ├─ FeedBackController.java
+│  │  │  │  ├─ HomeController.java
+│  │  │  │  ├─ LoginController.java
+│  │  │  │  ├─ OrderController.java
+│  │  │  ├─ model/
+│  │  │  │  ├─ Book.java
+│  │  │  │  ├─ Customer.java
+│  │  │  │  ├─ CustomerBooks.java
+│  │  │  │  ├─ FeedBack.java
+│  │  │  │  └─ Order.java
+│  │  │  ├─ repository/
+│  │  │  │  ├─ BillingRepository.java
+│  │  │  │  ├─ BookRepository.java
+│  │  │  │  ├─ FeedBackRepository.java
+│  │  │  │  └─ OrderRepository.java
+│  │  │  ├─ security/
+│  │  │  │  ├─ SecurityConfig.java
+│  │  │  │  └─ SecurityWebApplicationInitializer.java
+│  │  │  └─ service/
+│  │  │     ├─ BillingService.java
+│  │  │     ├─ BookService.java
+│  │  │     ├─ ChatBotService.java
+│  │  │     ├─ EmailService.java
+│  │  │     ├─ FeedBackService.java
+│  │  │     ├─ ShoppingCartService.java
+│  │  │     └─ BookStoreApplication.java
+│  │  ├─ resources/
+│  │  │  ├─ db/
+│  │  │  ├─ static/
+│  │  │  │  ├─ css/
+│  │  │  │  ├─ js/
+│  │  │  │  └─ images/
+│  │  │  ├─ templates/
+│  │  │  │  ├─ cart.html
+│  │  │  │  ├─ checkout.html
+│  │  │  │  ├─ error.html
+│  │  │  │  ├─ feedback.html
+│  │  │  │  ├─ form.html
+│  │  │  │  ├─ help.html
+│  │  │  │  ├─ index.html
+│  │  │  │  ├─ layout.html
+│  │  │  │  ├─ list.html
+│  │  │  │  ├─ login.html
+│  │  │  │  ├─ order.html
+│  │  │  │  ├─ orders.html
+│  │  │  │  ├─ showFeedBack.html
+│  │  │  │  └─ thankyou.html
+│  │  │  └─ application.properties
+├─ target/
+├─ .checkstyle
+├─ .classpath
+├─ .gitignore
+├─ .project
+├─ Dockerfile
+└─ mvnw
+
 ```
 
 ---
 
-## Database (example schema)
+## Database
 
 Use these example tables as a starting point. Adjust fields to your requirements.
 
